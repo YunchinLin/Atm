@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.lang.reflect.GenericArrayType;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -22,6 +24,9 @@ public class LoginActivity extends AppCompatActivity {
         String passwd = edPasswd.getText().toString();
         if("jack".equals(userid) && "1234".equals(passwd)){
             Toast.makeText(this, "登入成功", Toast.LENGTH_LONG).show();
+            getIntent().putExtra("LOGIN_USERID", userid);
+            getIntent().putExtra("LOGIN_PASSWD", passwd);
+            setResult(RESULT_OK, getIntent());
             finish();
         }else {
             new AlertDialog.Builder(this)
