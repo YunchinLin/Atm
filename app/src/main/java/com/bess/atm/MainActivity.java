@@ -3,31 +3,17 @@ package com.bess.atm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private final static int REQUEST_LOGIN = 102;
+    private static final int REQUEST_USERINFO = 105;
     boolean logon = false;
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_LOGIN){
-            if (resultCode == RESULT_OK){
-                String userid = data.getStringExtra("LOGIN_USERID");
-                String passwd = data.getStringExtra("LOGIN_PASSWD");
-                Log.d("RESULT", userid + "/" + passwd);
-            }else{
-                finish();
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +32,44 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent userInfo = new Intent(MainActivity.this, UserInfoActivity.class);
+                startActivityForResult(userInfo, REQUEST_USERINFO);
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_LOGIN:
+                if (resultCode == RESULT_OK) {
+                    String userid = data.getStringExtra("EXTRA_USERID");
+                    Toast.makeText(this, "Login userid: " + userid, Toast.LENGTH_LONG).show();
+//                    String passwd = data.getStringExtra("EXTRA_PASSWD");
+//                    Toast.makeText(this, "Login passwd: " + passwd, Toast.LENGTH_LONG).show();
+                    getSharedPreferences("atm", MODE_PRIVATE)
+                            .edit()
+                            .putString("USERID", userid)
+//                            .putString("PASSWD", passwd)
+                            .apply();
+//                            .commit();馬上存入
+//                Log.d("RESULT", userid + "/" + passwd);
+                } else {
+                    finish();
+                }
+                break;
+        case REQUEST_USERINFO:
+            if (resultCode == RESULT_OK) {
+              String nickname = data.getStringExtra("EXTRA_USERNAME");
+              Toast.makeText(this, "Nickname: " + nickname, Toast.LENGTH_LONG).show();
+              String phone = data.getStringExtra("EXTRA_PHONENUM");
+              Toast.makeText(this, "Phone: " + phone, Toast.LENGTH_LONG).show();
+              }
+              break;
+          }
     }
 
     @Override
