@@ -67,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
               Toast.makeText(this, "Nickname: " + nickname, Toast.LENGTH_LONG).show();
               String phone = data.getStringExtra("EXTRA_PHONENUM");
               Toast.makeText(this, "Phone: " + phone, Toast.LENGTH_LONG).show();
+                getSharedPreferences("atm", MODE_PRIVATE)
+                        .edit()
+                        .putString("NICKNAME", nickname)
+                        .putString("PHONE", phone)
+                        .apply();
               }
               break;
           }
