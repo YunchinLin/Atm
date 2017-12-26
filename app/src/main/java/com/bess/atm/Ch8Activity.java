@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class Ch8Activity extends AppCompatActivity {
+public class                                                                                                                                                                                                                                                                                      Ch8Activity extends AppCompatActivity {
 
     private String TAG = Ch8Activity.class.getSimpleName();
 
