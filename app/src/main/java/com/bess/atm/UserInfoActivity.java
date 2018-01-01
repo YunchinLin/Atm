@@ -17,6 +17,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private EditText edPhone;
     private static final String TAG = UserInfoActivity.class.getSimpleName();
     private Spinner ages;
+    public final static int REQUEST_ADDRESS = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,9 @@ public class UserInfoActivity extends AppCompatActivity {
     }
 
     public void addr(View view){
-        startActivity(new Intent(this, CityActivity.class));
+//        startActivity(new Intent(this,AddrActivity.class));
+        Intent intent = new Intent(this,CityActivity.class);
+        startActivityForResult(intent ,REQUEST_ADDRESS);
     }
 
 }

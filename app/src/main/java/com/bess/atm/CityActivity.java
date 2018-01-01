@@ -12,6 +12,9 @@ public class CityActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private String[] cities;
     private String TAG = CityActivity.class.getSimpleName();
+    public final static int REQUEST_AREA_K = 7;
+    public final static int REQUEST_AREA_N = 9;
+    public final static int REQUEST_AREA_T = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +34,14 @@ public class CityActivity extends AppCompatActivity implements AdapterView.OnIte
 ////        tv.setText(tv.getText() + "*");
         String[] data = null;
         if (position == 0){
-            startActivity(new Intent(this, Area1Activity.class));
+            Intent intent = new Intent(this, Area1Activity.class);
+            startActivityForResult(intent, REQUEST_AREA_K);
         }else if(position == 1){
-            startActivity(new Intent(this, Area2Activity.class));
+            Intent intent = new Intent(this, Area2Activity.class);
+            startActivityForResult(intent, REQUEST_AREA_N);
         }else{
-            startActivity(new Intent(this, Area3Activity.class));
+            Intent intent = new Intent(this, Area3Activity.class);
+            startActivityForResult(intent, REQUEST_AREA_T);
         }
     }
 }
