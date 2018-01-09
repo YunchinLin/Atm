@@ -12,6 +12,7 @@ import java.lang.reflect.GenericArrayType;
 public class LoginActivity extends AppCompatActivity {
     private EditText edUserid;
     private EditText edPasswd;
+    private String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view){
-        String userid = edUserid.getText().toString();
+        userid = edUserid.getText().toString();
         String passwd = edPasswd.getText().toString();
         if("jack".equals(userid) && "1234".equals(passwd)){
             Toast.makeText(this, "登入成功", Toast.LENGTH_LONG).show();
